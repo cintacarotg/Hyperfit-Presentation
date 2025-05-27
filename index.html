@@ -224,6 +224,19 @@
       color: #666;
       margin-top: 12px;
     }
+    .sprint-page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.98);
+    }
   </style>
 </head>
 <body>
@@ -283,6 +296,19 @@
         <button id="carousel-prev" class="carousel-button">&#8592;</button>
         <div id="carousel-event" class="carousel-event" tabindex="0"></div>
         <button id="carousel-next" class="carousel-button">&#8594;</button>
+      </div>
+    </div>
+    <!-- Sprint 0 Page -->
+    <div class="sprint-page" id="sprint0-page" style="display:none;">
+      <div class="sprint0-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/lego.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+        <img src="images/characters/avatar_ivan.jpeg" alt="Ivan" class="avatar" id="sprint0-avatar">
+        <div class="dialogue-content">
+          <div class="character-name" id="sprint0-character-name">Ivan</div>
+          <div class="dialogue" id="sprint0-dialogue-text"></div>
+          <button class="next-btn" id="sprint0-next-btn">Següent</button>
+          <button class="next-btn" id="sprint0-close" style="display:none; margin-left:8px;">Tornar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -419,9 +445,20 @@
 
   // Allow clicking on event to select/show more (for now just highlight)
   carouselEvent.addEventListener('click', () => {
-    carouselEvent.classList.add('selected');
-    setTimeout(() => carouselEvent.classList.remove('selected'), 300);
-    // You can add more logic here to show details or modals if needed
+    if (events[eventIdx].title === "Sprint 0") {
+      document.getElementById('sprint0-page').style.display = "flex";
+      document.getElementById('carousel-container').style.display = "none";
+    } else {
+      carouselEvent.classList.add('selected');
+      setTimeout(() => carouselEvent.classList.remove('selected'), 300);
+    }
+  });
+
+  // Close Sprint 0 page and return to carousel
+  document.getElementById('sprint0-close').addEventListener('click', () => {
+    document.getElementById('sprint0-page').style.display = "none";
+    document.getElementById('carousel-container').style.display = "flex";
+    carouselEvent.focus();
   });
 
   // Also allow keyboard navigation
@@ -441,6 +478,88 @@
     updateCarousel();
     carouselEvent.focus();
   }
+
+  // Sprint 0 dialogue data
+  const sprint0Dialogues = [
+    {
+      name: "Ivan",
+      text: "Vam començar amb un taller de LEGO. Això ens va ajudar a descobrir les nostres habilitats i conèixer millor els companys."
+    },
+    {
+      name: "Ivan",
+      text: "Per interpretar el resultat has de ficar-li imaginació."
+    }
+  ];
+  let sprint0Idx = 0;
+  const sprint0Page = document.getElementById('sprint0-page');
+  const sprint0DialogueBox = document.getElementById('sprint0-dialogue-text');
+  const sprint0NameBox = document.getElementById('sprint0-character-name');
+  const sprint0NextBtn = document.getElementById('sprint0-next-btn');
+  const sprint0CloseBtn = document.getElementById('sprint0-close');
+  const sprint0Avatar = document.getElementById('sprint0-avatar');
+
+  let sprint0Typing = false;
+  let sprint0TypingTimeout;
+
+  function typeSprint0Dialogue(text, callback) {
+    sprint0Typing = true;
+    sprint0DialogueBox.innerHTML = "";
+    let i = 0;
+    function typeChar() {
+      if (i < text.length) {
+        sprint0DialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+        if (text[i] !== " " && text[i] !== "\n") playTypeSound();
+        i++;
+        sprint0TypingTimeout = setTimeout(typeChar, 22);
+      } else {
+        sprint0Typing = false;
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  function showSprint0Dialogue(index) {
+    sprint0NameBox.textContent = sprint0Dialogues[index].name;
+    typeSprint0Dialogue(sprint0Dialogues[index].text);
+    sprint0NextBtn.style.display = (index < sprint0Dialogues.length - 1) ? "inline-block" : "none";
+    sprint0CloseBtn.style.display = (index === sprint0Dialogues.length - 1) ? "inline-block" : "none";
+  }
+
+  // Show Sprint 0 page when Sprint 0 event is clicked in the carousel
+  carouselEvent.addEventListener('click', () => {
+    if (events[eventIdx].title === "Sprint 0") {
+      sprint0Page.style.display = "flex";
+      sprint0Page.style.flexDirection = "column";
+      sprint0Page.style.alignItems = "center";
+      sprint0Page.style.justifyContent = "center";
+      document.getElementById('carousel-container').style.display = "none";
+      sprint0Idx = 0;
+      showSprint0Dialogue(sprint0Idx);
+    } else {
+      carouselEvent.classList.add('selected');
+      setTimeout(() => carouselEvent.classList.remove('selected'), 300);
+    }
+  });
+
+  sprint0NextBtn.addEventListener('click', () => {
+    if (sprint0Typing) {
+      clearTimeout(sprint0TypingTimeout);
+      sprint0DialogueBox.innerHTML = sprint0Dialogues[sprint0Idx].text.replace(/\n/g, "<br>");
+      sprint0Typing = false;
+      return;
+    }
+    sprint0Idx++;
+    if (sprint0Idx < sprint0Dialogues.length) {
+      showSprint0Dialogue(sprint0Idx);
+    }
+  });
+
+  sprint0CloseBtn.addEventListener('click', () => {
+    sprint0Page.style.display = "none";
+    document.getElementById('carousel-container').style.display = "flex";
+    carouselEvent.focus();
+  });
   </script>
 </body>
 </html>
