@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Hyperfit — Presentació Interactiva</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('images/backgrounds/campus.jpg') center/cover no-repeat;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      color: #222;
+    }
+    .overlay {
+      background: rgba(255,255,255,0.85);
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .character-box {
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 0 16px #bbb;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 0;
+      padding: 32px 32px 24px 32px;
+      text-align: left;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+    }
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #2a7cff;
+      background: #eaf1ff;
+      flex-shrink: 0;
+    }
+    .dialogue-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .character-name {
+      font-weight: bold;
+      color: #2a7cff;
+      margin-bottom: 8px;
+      font-size: 1.2em;
+    }
+    .dialogue {
+      font-size: 1.1em;
+      margin-bottom: 12px;
+    }
+    .next-btn {
+      background: #2a7cff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+      align-self: flex-end;
+    }
+    .next-btn:hover {
+      background: #1a5fcc;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="character-box" id="scene-box">
+      <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar" id="avatar-img">
+      <div class="dialogue-content">
+        <div class="character-name" id="character-name">Cinta</div>
+        <div class="dialogue" id="dialogue-text">
+          Hola! Sóc la Cinta, portaveu de l’equip ENBIDIA.<br><br>
+          Avui us presentarem Hyperfit, el nostre projecte per a l’assignatura d’Enginyeria de Software!
+        </div>
+        <button class="next-btn" id="next-btn">Següent</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Dialogues for Cinta
+    const dialogues = [
+      {
+        name: "Cinta",
+        text: "Hola! Sóc la Cinta, portaveu de l’equip ENBIDIA."
+      },
+      {
+        name: "Cinta",
+        text: "Avui us presentarem Hyperfit, el nostre projecte per a l’assignatura d’Enginyeria de Software!"
+      },
+      {
+        name: "Cinta",
+        text: "Si vols saber com hem arribat fins aquí, acompanya’ns en aquest viatge a través de cada sprint!"
+      }
+    ];
+    let idx = 0;
+    const nameBox = document.getElementById('character-name');
+    const dialogueBox = document.getElementById('dialogue-text');
+    const nextBtn = document.getElementById('next-btn');
+    const avatarImg = document.getElementById('avatar-img');
+    nextBtn.addEventListener('click', () => {
+      idx++;
+      if (idx < dialogues.length) {
+        nameBox.textContent = dialogues[idx].name;
+        dialogueBox.textContent = dialogues[idx].text;
+        // avatarImg.src = "images/characters/avatar_cinta_400x400.png"; // If you have more characters, change here
+      } else {
+        dialogueBox.textContent = "Comencem el viatge pels nostres sprints!";
+        nextBtn.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
