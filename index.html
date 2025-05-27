@@ -21,6 +21,77 @@
       justify-content: flex-end;
       align-items: center;
     }
+    .presentation-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      top: 0; left: 0;
+      background: rgba(255,255,255,0.92);
+      z-index: 2;
+    }
+    .presentation-title {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #2a7cff;
+      margin-bottom: 0.5em;
+      margin-top: 0.5em;
+      text-align: center;
+    }
+    .presentation-team {
+      font-size: 1.5em;
+      margin-bottom: 1.5em;
+      color: #222;
+      text-align: center;
+    }
+    .avatars-row {
+      display: flex;
+      gap: 36px;
+      margin-bottom: 2em;
+      justify-content: center;
+    }
+    .avatar-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .avatar-pres {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #2a7cff;
+      background: #eaf1ff;
+      margin-bottom: 0.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5em;
+      color: #2a7cff;
+    }
+    .avatar-name {
+      font-size: 1em;
+      color: #2a7cff;
+      font-weight: bold;
+      text-align: center;
+    }
+    .start-btn {
+      background: #2a7cff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 36px;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-top: 1em;
+      transition: background 0.2s;
+    }
+    .start-btn:hover {
+      background: #1a5fcc;
+    }
     .character-box {
       background: #fff;
       border-radius: 16px 16px 0 0;
@@ -43,6 +114,11 @@
       border: 3px solid #2a7cff;
       background: #eaf1ff;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      color: #2a7cff;
     }
     .dialogue-content {
       flex: 1;
@@ -78,12 +154,30 @@
 </head>
 <body>
   <div class="overlay">
-    <div class="character-box" id="scene-box">
+    <!-- Presentation Screen -->
+    <div class="presentation-screen" id="presentation-screen">
+      <div class="presentation-title">Hyperfit</div>
+      <div class="presentation-team">Equip: ENBIDIA</div>
+      <div class="avatars-row">
+        <div class="avatar-block">
+          <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar-pres">
+          <div class="avatar-name">Cinta</div>
+        </div>
+        <div class="avatar-block">
+          <div class="avatar-pres" style="background:#fffbe6; border:3px solid #ffc107;">🧑‍🏫</div>
+          <div class="avatar-name">Toni</div>
+        </div>
+        <!-- Add more avatar-blocks for other team members if you have their images -->
+      </div>
+      <button class="start-btn" id="start-btn">Començar</button>
+    </div>
+    <!-- Dialogue Scene -->
+    <div class="character-box" id="scene-box" style="display:none;">
       <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar" id="avatar-img">
       <div class="dialogue-content">
         <div class="character-name" id="character-name">Cinta</div>
         <div class="dialogue" id="dialogue-text">
-          Hola! Sóc la Cinta, portaveu de l’equip ENBIDIA.<br><br>
+          Hola Toni! Soc la Cinta, portaveu de l’equip ENBIDIA.<br><br>
           Avui us presentarem Hyperfit, el nostre projecte per a l’assignatura d’Enginyeria de Software!
         </div>
         <button class="next-btn" id="next-btn">Següent</button>
@@ -95,11 +189,11 @@
     const dialogues = [
       {
         name: "Cinta",
-        text: "Hola! Sóc la Cinta, portaveu de l’equip ENBIDIA."
+        text: "Hola Toni! Soc la Cinta, portaveu de l’equip ENBIDIA."
       },
       {
         name: "Cinta",
-        text: "Avui us presentarem Hyperfit, el nostre projecte per a l’assignatura d’Enginyeria de Software!"
+        text: "Hyperfit és una aplicació que hem creat per ajudar a generar rutines de gimnàs personalitzades amb intel·ligència artificial."
       },
       {
         name: "Cinta",
@@ -111,12 +205,20 @@
     const dialogueBox = document.getElementById('dialogue-text');
     const nextBtn = document.getElementById('next-btn');
     const avatarImg = document.getElementById('avatar-img');
+    const presentationScreen = document.getElementById('presentation-screen');
+    const sceneBox = document.getElementById('scene-box');
+    const startBtn = document.getElementById('start-btn');
+
+    startBtn.addEventListener('click', () => {
+      presentationScreen.style.display = 'none';
+      sceneBox.style.display = 'flex';
+    });
+
     nextBtn.addEventListener('click', () => {
       idx++;
       if (idx < dialogues.length) {
         nameBox.textContent = dialogues[idx].name;
         dialogueBox.textContent = dialogues[idx].text;
-        // avatarImg.src = "images/characters/avatar_cinta_400x400.png"; // If you have more characters, change here
       } else {
         dialogueBox.textContent = "Comencem el viatge pels nostres sprints!";
         nextBtn.style.display = "none";
