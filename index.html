@@ -150,6 +150,80 @@
     .next-btn:hover {
       background: #1a5fcc;
     }
+    .carousel-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.96);
+    }
+    .carousel-title {
+      font-size: 2.2em;
+      color: #2a7cff;
+      margin-bottom: 32px;
+      font-weight: bold;
+    }
+    .carousel {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+    .carousel-button {
+      background: #2a7cff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 2.2em;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #bbb;
+      transition: background 0.2s;
+    }
+    .carousel-button:hover {
+      background: #1a5fcc;
+    }
+    .carousel-event {
+      min-width: 350px;
+      min-height: 180px;
+      background: #eaf1ff;
+      border-radius: 18px;
+      box-shadow: 0 0 16px #bbb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 56px;
+      font-size: 2em;
+      color: #222;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      text-align: center;
+    }
+    .carousel-event.selected,
+    .carousel-event:active {
+      transform: scale(1.04);
+      box-shadow: 0 0 24px #2a7cff88;
+      border: 3px solid #2a7cff;
+    }
+    .carousel-event img {
+      width: auto;
+      height: 120px;
+      max-width: 220px;
+      margin-bottom: 16px;
+      display: block;
+      object-fit: contain;
+    }
+    .carousel-event-desc {
+      font-size: 0.7em;
+      color: #666;
+      margin-top: 12px;
+    }
   </style>
 </head>
 <body>
@@ -177,6 +251,10 @@
             <img src="images/characters/avatar_yeray.jpeg" alt="Yeray" class="avatar-pres">
             <div class="avatar-name">Yeray</div>
           </div>
+            <div class="avatar-block">
+            <img src="images/characters/avatar-ferran.jpeg" alt="Ferran" class="avatar-pres">
+            <div class="avatar-name">Ferran</div>
+          </div>
         </div>
         <!-- Teacher separated -->
         <div class="avatar-block" style="margin-left: 60px;">
@@ -196,6 +274,15 @@
           Avui us presentarem Hyperfit, el nostre projecte per a l’assignatura d’Enginyeria de Software!
         </div>
         <button class="next-btn" id="next-btn">Següent</button>
+      </div>
+    </div>
+    <!-- Carousel Container -->
+    <div class="carousel-container" id="carousel-container">
+      <div class="carousel-title">Etapes del projecte</div>
+      <div class="carousel">
+        <button id="carousel-prev" class="carousel-button">&#8592;</button>
+        <div id="carousel-event" class="carousel-event" tabindex="0"></div>
+        <button id="carousel-next" class="carousel-button">&#8594;</button>
       </div>
     </div>
   </div>
@@ -280,13 +367,80 @@
       showDialogue(idx);
     } else {
       // Play the typewriter sound for the final message as it appears letter by letter
-      typeDialogue("Comencem el viatge pels nostres sprints!");
+      typeDialogue("Comencem el viatge pels nostres sprints!", showCarousel);
       nextBtn.style.display = "none";
     }
   });
 
-  // Initialize first dialogue if needed
-  // showDialogue(idx);
+  // Carousel data (add image for Sprint 0)
+  const events = [
+    { 
+      title: "Sprint 0", 
+      desc: "Coneixement inicial i taller de LEGO",
+      img: "images/backgrounds/lego.jpg"
+    },
+    { title: "Sprint 1", desc: "Concepció i disseny del projecte" },
+    { title: "Sprint 2", desc: "MVP i feedback dels usuaris" },
+    { title: "Reunió", desc: "Resolució de problemes d’organització" },
+    { title: "Sprint 3", desc: "Implementació i criteris d’acceptació" },
+    { title: "Sprint 4", desc: "Entrega final, demo i Trello" },
+    { title: "Demo", desc: "Presentació final del projecte" }
+  ];
+  let eventIdx = 0;
+  const carouselContainer = document.getElementById('carousel-container');
+  const carouselEvent = document.getElementById('carousel-event');
+  const carouselPrev = document.getElementById('carousel-prev');
+  const carouselNext = document.getElementById('carousel-next');
+
+  function updateCarousel() {
+    const event = events[eventIdx];
+    let html = '';
+    if (event.img) {
+      html += `<img src="${event.img}" alt="${event.title}">`;
+    }
+    html += `<div>${event.title}</div>`;
+    html += `<div class="carousel-event-desc">${event.desc}</div>`;
+    carouselEvent.innerHTML = html;
+    // Highlight selected
+    carouselEvent.classList.add('selected');
+    setTimeout(() => carouselEvent.classList.remove('selected'), 200);
+  }
+
+  if (carouselPrev && carouselNext) {
+    carouselPrev.addEventListener('click', () => {
+      eventIdx = (eventIdx - 1 + events.length) % events.length;
+      updateCarousel();
+    });
+    carouselNext.addEventListener('click', () => {
+      eventIdx = (eventIdx + 1) % events.length;
+      updateCarousel();
+    });
+  }
+
+  // Allow clicking on event to select/show more (for now just highlight)
+  carouselEvent.addEventListener('click', () => {
+    carouselEvent.classList.add('selected');
+    setTimeout(() => carouselEvent.classList.remove('selected'), 300);
+    // You can add more logic here to show details or modals if needed
+  });
+
+  // Also allow keyboard navigation
+  carouselEvent.addEventListener('keydown', (e) => {
+    if (e.key === "ArrowLeft") {
+      carouselPrev.click();
+    } else if (e.key === "ArrowRight") {
+      carouselNext.click();
+    } else if (e.key === "Enter" || e.key === " ") {
+      carouselEvent.click();
+    }
+  });
+
+  // Show carousel after last dialogue
+  function showCarousel() {
+    carouselContainer.style.display = "flex";
+    updateCarousel();
+    carouselEvent.focus();
+  }
   </script>
 </body>
 </html>
