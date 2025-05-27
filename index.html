@@ -199,6 +199,8 @@
       </div>
     </div>
   </div>
+  <audio id="type-sound" src="audios/typewriter-key.wav" preload="auto"></audio>
+
   <script>
   // Dialogues for Cinta
   const dialogues = [
@@ -223,9 +225,16 @@
   const presentationScreen = document.getElementById('presentation-screen');
   const sceneBox = document.getElementById('scene-box');
   const startBtn = document.getElementById('start-btn');
+  const typeSound = document.getElementById('type-sound');
 
   let typing = false;
   let typingTimeout;
+
+  function playTypeSound() {
+    // Rewind and play for each letter
+    typeSound.currentTime = 0;
+    typeSound.play();
+  }
 
   function typeDialogue(text, callback) {
     typing = true;
@@ -234,6 +243,8 @@
     function typeChar() {
       if (i < text.length) {
         dialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+        // Only play sound for visible characters (not spaces or line breaks)
+        if (text[i] !== " " && text[i] !== "\n") playTypeSound();
         i++;
         typingTimeout = setTimeout(typeChar, 22); // speed in ms
       } else {
@@ -268,7 +279,8 @@
     if (idx < dialogues.length) {
       showDialogue(idx);
     } else {
-      dialogueBox.innerHTML = "Comencem el viatge pels nostres sprints!";
+      // Play the typewriter sound for the final message as it appears letter by letter
+      typeDialogue("Comencem el viatge pels nostres sprints!");
       nextBtn.style.display = "none";
     }
   });
