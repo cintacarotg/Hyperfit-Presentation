@@ -159,15 +159,30 @@
       <div class="presentation-title">Hyperfit</div>
       <div class="presentation-team">Equip: ENBIDIA</div>
       <div class="avatars-row">
-        <div class="avatar-block">
-          <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar-pres">
-          <div class="avatar-name">Cinta</div>
+        <!-- Team members group -->
+        <div style="display: flex; gap: 36px; margin-right: 60px;">
+          <div class="avatar-block">
+            <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar-pres">
+            <div class="avatar-name">Cinta</div>
+          </div>
+          <div class="avatar-block">
+            <img src="images/characters/avatar_davi.jpeg" alt="Davi" class="avatar-pres">
+            <div class="avatar-name">Davi</div>
+          </div>
+          <div class="avatar-block">
+            <img src="images/characters/avatar_ivan.jpeg" alt="Ivan" class="avatar-pres">
+            <div class="avatar-name">Ivan</div>
+          </div>
+          <div class="avatar-block">
+            <img src="images/characters/avatar_yeray.jpeg" alt="Yeray" class="avatar-pres">
+            <div class="avatar-name">Yeray</div>
+          </div>
         </div>
-        <div class="avatar-block">
-          <div class="avatar-pres" style="background:#fffbe6; border:3px solid #ffc107;">🧑‍🏫</div>
+        <!-- Teacher separated -->
+        <div class="avatar-block" style="margin-left: 60px;">
+          <img src="images/characters/avatar_toni.png" alt="Toni" class="avatar-pres">
           <div class="avatar-name">Toni</div>
         </div>
-        <!-- Add more avatar-blocks for other team members if you have their images -->
       </div>
       <button class="start-btn" id="start-btn">Començar</button>
     </div>
@@ -185,45 +200,81 @@
     </div>
   </div>
   <script>
-    // Dialogues for Cinta
-    const dialogues = [
-      {
-        name: "Cinta",
-        text: "Hola Toni! Soc la Cinta, portaveu de l’equip ENBIDIA."
-      },
-      {
-        name: "Cinta",
-        text: "Hyperfit és una aplicació que hem creat per ajudar a generar rutines de gimnàs personalitzades amb intel·ligència artificial."
-      },
-      {
-        name: "Cinta",
-        text: "Si vols saber com hem arribat fins aquí, acompanya’ns en aquest viatge a través de cada sprint!"
-      }
-    ];
-    let idx = 0;
-    const nameBox = document.getElementById('character-name');
-    const dialogueBox = document.getElementById('dialogue-text');
-    const nextBtn = document.getElementById('next-btn');
-    const avatarImg = document.getElementById('avatar-img');
-    const presentationScreen = document.getElementById('presentation-screen');
-    const sceneBox = document.getElementById('scene-box');
-    const startBtn = document.getElementById('start-btn');
+  // Dialogues for Cinta
+  const dialogues = [
+    {
+      name: "Cinta",
+      text: "Hola Toni! Soc la Cinta, portaveu de l’equip ENBIDIA."
+    },
+    {
+      name: "Cinta",
+      text: "Hyperfit és una aplicació que hem creat per ajudar a generar rutines de gimnàs personalitzades amb intel·ligència artificial."
+    },
+    {
+      name: "Cinta",
+      text: "Si vols saber com hem arribat fins aquí, acompanya’ns en aquest viatge a través de cada sprint!"
+    }
+  ];
+  let idx = 0;
+  const nameBox = document.getElementById('character-name');
+  const dialogueBox = document.getElementById('dialogue-text');
+  const nextBtn = document.getElementById('next-btn');
+  const avatarImg = document.getElementById('avatar-img');
+  const presentationScreen = document.getElementById('presentation-screen');
+  const sceneBox = document.getElementById('scene-box');
+  const startBtn = document.getElementById('start-btn');
 
-    startBtn.addEventListener('click', () => {
-      presentationScreen.style.display = 'none';
-      sceneBox.style.display = 'flex';
-    });
+  let typing = false;
+  let typingTimeout;
 
-    nextBtn.addEventListener('click', () => {
-      idx++;
-      if (idx < dialogues.length) {
-        nameBox.textContent = dialogues[idx].name;
-        dialogueBox.textContent = dialogues[idx].text;
+  function typeDialogue(text, callback) {
+    typing = true;
+    dialogueBox.innerHTML = "";
+    let i = 0;
+    function typeChar() {
+      if (i < text.length) {
+        dialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+        i++;
+        typingTimeout = setTimeout(typeChar, 22); // speed in ms
       } else {
-        dialogueBox.textContent = "Comencem el viatge pels nostres sprints!";
-        nextBtn.style.display = "none";
+        typing = false;
+        if (callback) callback();
       }
-    });
+    }
+    typeChar();
+  }
+
+  function showDialogue(index) {
+    nameBox.textContent = dialogues[index].name;
+    typeDialogue(dialogues[index].text);
+  }
+
+  startBtn.addEventListener('click', () => {
+    presentationScreen.style.display = 'none';
+    sceneBox.style.display = 'flex';
+    idx = 0;
+    showDialogue(idx);
+    nextBtn.style.display = "inline-block";
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (typing) {
+      clearTimeout(typingTimeout);
+      dialogueBox.innerHTML = dialogues[idx].text.replace(/\n/g, "<br>");
+      typing = false;
+      return;
+    }
+    idx++;
+    if (idx < dialogues.length) {
+      showDialogue(idx);
+    } else {
+      dialogueBox.innerHTML = "Comencem el viatge pels nostres sprints!";
+      nextBtn.style.display = "none";
+    }
+  });
+
+  // Initialize first dialogue if needed
+  // showDialogue(idx);
   </script>
 </body>
 </html>
