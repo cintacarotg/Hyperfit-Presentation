@@ -341,7 +341,7 @@
     </div>
     <!-- Sprint 2 Page -->
     <div class="sprint-page" id="sprint2-page" style="display:none;">
-      <div class="sprint2-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="sprint2-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/creacio-MVP.jpg') center/cover no-repeat; z-index:-1;"></div>
       <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
         <img src="images/characters/avatar_yeray.jpeg" alt="Yeray" class="avatar" id="sprint2-avatar">
         <div class="dialogue-content">
@@ -351,6 +351,63 @@
           <button class="next-btn" id="sprint2-close" style="display:none; margin-left:8px;">Tornar</button>
         </div>
       </div>
+      <!-- Replace the timeline tooltip and script in Sprint 2 Page with this version -->
+      <!-- Timeline and tooltip (inside #sprint2-page, after the character-box) -->
+      <div style="position:absolute; top:18%; left:0; right:0; display:flex; flex-direction:column; align-items:center; z-index:2;">
+        <!-- Vertical timeline line -->
+        <div style="height: 340px; width: 6px; background: #222; border-radius: 3px; position: relative; margin-bottom: 0; margin-top: 0; box-shadow: 0 2px 8px #bbb;">
+          <!-- Timeline points (buttons) -->
+          <button class="timeline-point" data-title="user-story-mapping.jpg"
+            style="position:absolute; top:0; left:50%; transform:translate(-50%,-50%); background:#fffbe6; border:4px solid #ffb300; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #ffb30044; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-size:1.1em; transition:box-shadow 0.2s;">
+            <span style="font-size:1.5em; color:#ffb300;">🗺️</span>
+          </button>
+          <button class="timeline-point" data-title="journey-map1.jpg"
+            style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#eaffea; border:4px solid #43c300; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #43c30044; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-size:1.1em; transition:box-shadow 0.2s;">
+            <span style="font-size:1.5em; color:#43c300;">🟢</span>
+          </button>
+          <button class="timeline-point" data-title="journey-map2.jpg"
+            style="position:absolute; top:100%; left:50%; transform:translate(-50%,-50%); background:#e0f3ff; border:4px solid #2a7cff; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #2a7cff44; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-size:1.1em; transition:box-shadow 0.2s;">
+            <span style="font-size:1.5em; color:#2a7cff;">🔵</span>
+          </button>
+        </div>
+        <!-- Tooltip for timeline points -->
+        <div id="timeline-tooltip" style="display:none; position:fixed; background:#fff; color:#222; border-radius:8px; padding:8px 18px; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-size:1.1em; box-shadow:0 2px 8px #bbb; pointer-events:none; z-index:100;"></div>
+      </div>
+
+      <script>
+        // Vertical timeline points logic for Sprint 2 (tooltip follows mouse)
+        (function() {
+          const timelinePoints = document.querySelectorAll('.sprint-page#sprint2-page .timeline-point');
+          const timelineTooltip = document.getElementById('timeline-tooltip');
+          const timelineLinks = [
+            'images/projects/user-story-mapping.jpg',
+            'images/projects/journey-map1.jpg',
+            'images/projects/journey-map2.jpg'
+          ];
+          const timelineFiles = [
+            'user-story-mapping.jpg',
+            'journey-map1.jpg',
+            'journey-map2.jpg'
+          ];
+
+          timelinePoints.forEach((point, idx) => {
+            point.addEventListener('mouseenter', function(e) {
+              timelineTooltip.textContent = timelineFiles[idx];
+              timelineTooltip.style.display = 'block';
+            });
+            point.addEventListener('mousemove', function(e) {
+              timelineTooltip.style.left = (e.clientX + 18) + 'px';
+              timelineTooltip.style.top = (e.clientY - 10) + 'px';
+            });
+            point.addEventListener('mouseleave', function() {
+              timelineTooltip.style.display = 'none';
+            });
+            point.addEventListener('click', function() {
+              window.open(timelineLinks[idx], '_blank');
+            });
+          });
+        })();
+      </script>
     </div> 
       
     <!-- Reunió Page -->
@@ -510,7 +567,10 @@
       img: "images/backgrounds/post-its.jpg",
     },
 
-    { title: "Sprint 2", desc: "MVP i feedback dels usuaris" },
+    { title: "Sprint 2",
+      desc: "MVP i feedback dels usuaris",
+      img:  "images/backgrounds/creacio-MVP.jpg"
+    },
     { title: "Reunió", desc: "Resolució de problemes d’organització" },
     { title: "Sprint 3", desc: "Implementació i criteris d’acceptació" },
     { title: "Sprint 4", desc: "Entrega final, demo i Trello" },
@@ -595,11 +655,11 @@
   const sprint0Dialogues = [
     {
       name: "Ivan",
-      text: "Vam començar amb un taller de LEGO. Això ens va ajudar a descobrir les nostres habilitats i conèixer millor els companys."
+      text: "Vam començar amb un taller de LEGO. Això ens va ajudar a conèixer-nos millor."
     },
     {
       name: "Ivan",
-      text: "Per interpretar el resultat has de ficar-li imaginació."
+      text: "Aquest 'gimnàs' ens va inspirar a enfocar el nostre producte. Una aplicació per al gimnàs."
     }
   ];
   let sprint0Idx = 0;
