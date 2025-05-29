@@ -315,7 +315,34 @@
         </div>
       </div>
     </div>
-  </div>
+    <!-- Sprint 1 Page -->
+     <div class="sprint-page" id="sprint1-page" style="display:none;">
+      <div class="sprint1-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+        <img src="images/characters/avatar_men.jpeg" alt="Men" class="avatar" id="sprint1-avatar">
+        <div class="dialogue-content">
+          <div class="character-name" id="sprint1-character-name">Men</div>
+          <div class="dialogue" id="sprint1-dialogue-text"></div>
+          <button class="next-btn" id="sprint1-next-btn">Següent</button>
+          <button class="next-btn" id="sprint1-close" style="display:none; margin-left:8px;">Tornar</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!-- Sprint 2 Page -->
+      <div class="sprint-page" id="sprint2-page" style="display:none;">
+        <div class="sprint2-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+        <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+          <img src="images/characters/avatar_yeray.jpeg" alt="Yeray" class="avatar" id="sprint2-avatar">
+          <div class="dialogue-content">
+            <div class="character-name" id="sprint2-character-name">Yeray</div>
+            <div class="dialogue" id="sprint2-dialogue-text"></div>
+            <button class="next-btn" id="sprint2-next-btn">Següent</button>
+            <button class="next-btn" id="sprint2-close" style="display:none; margin-left:8px;">Tornar</button>
+          </div>
+        </div>
+      </div>   
+      <!-- Sprint 3 Page -->
   <audio id="type-sound" src="audios/typewriter-key.wav" preload="auto"></audio>
 
   <script>
@@ -323,7 +350,7 @@
   const dialogues = [
     {
       name: "Cinta",
-      text: "Hola Toni! Soc la Cinta, portaveu de l’equip ENBIDIA."
+      text: "Hola Toni! Sóc la Cinta, portaveu de l’equip ENBIDIA."
     },
     {
       name: "Cinta",
@@ -407,9 +434,13 @@
     { 
       title: "Sprint 0", 
       desc: "Coneixement inicial i taller de LEGO",
-      img: "images/backgrounds/lego.jpg"
+      img: "images/backgrounds/lego.jpg",
     },
-    { title: "Sprint 1", desc: "Concepció i disseny del projecte" },
+    { title: "Sprint 1", 
+      desc: "Concepció i disseny del projecte",
+      img: "images/backgrounds/campus.jpg",
+    },
+
     { title: "Sprint 2", desc: "MVP i feedback dels usuaris" },
     { title: "Reunió", desc: "Resolució de problemes d’organització" },
     { title: "Sprint 3", desc: "Implementació i criteris d’acceptació" },
@@ -558,12 +589,243 @@
       showSprint0Dialogue(sprint0Idx);
     }
   });
+    // Sprint 1 dialogue data
+  const sprint1Dialogues = [
+    {
+      name: "Men",
+      text: "Vam crear el Product Canvas i vam definir els requisits."
+    },
+    {
+      name: "Men",
+      text: "Això ens va ajudar a veure les funcionalitats clau i com encaixava amb les necessitats dels usuaris."
+    }
+  ];
+  let sprint1Idx = 0;
+  const sprint1Page = document.getElementById('sprint1-page');
+  const sprint1DialogueBox = document.getElementById('sprint1-dialogue-text');
+  const sprint1NameBox = document.getElementById('sprint1-character-name');
+  const sprint1NextBtn = document.getElementById('sprint1-next-btn');
+  const sprint1CloseBtn = document.getElementById('sprint1-close');
+  const sprint1Avatar = document.getElementById('sprint1-avatar');
 
-  sprint0CloseBtn.addEventListener('click', () => {
-    sprint0Page.style.display = "none";
+  let sprint1Typing = false;
+  let sprint1TypingTimeout;
+
+  function typeSprint1Dialogue(text, callback) {
+    sprint1Typing = true;
+    sprint1DialogueBox.innerHTML = "";
+    let i = 0;
+    function typeChar() {
+      if (i < text.length) {
+        sprint1DialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+        if (text[i] !== " " && text[i] !== "\n") playTypeSound();
+        i++;
+        sprint1TypingTimeout = setTimeout(typeChar, 22);
+      } else {
+        sprint1Typing = false;
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  function showSprint1Dialogue(index) {
+    sprint1NameBox.textContent = sprint1Dialogues[index].name;
+    typeSprint1Dialogue(sprint1Dialogues[index].text);
+    sprint1NextBtn.style.display = (index < sprint1Dialogues.length - 1) ? "inline-block" : "none";
+    sprint1CloseBtn.style.display = (index === sprint1Dialogues.length - 1) ? "inline-block" : "none";
+  }
+
+  carouselEvent.addEventListener('click', () => {
+    if (events[eventIdx].title === "Sprint 1") {
+      sprint1Page.style.display = "flex";
+      sprint1Page.style.flexDirection = "column";
+      sprint1Page.style.alignItems = "center";
+      sprint1Page.style.justifyContent = "center";
+      document.getElementById('carousel-container').style.display = "none";
+      sprint1Idx = 0;
+      showSprint1Dialogue(sprint1Idx);
+    }
+  });
+
+  sprint1NextBtn.addEventListener('click', () => {
+    if (sprint1Typing) {
+      clearTimeout(sprint1TypingTimeout);
+      sprint1DialogueBox.innerHTML = sprint1Dialogues[sprint1Idx].text.replace(/\n/g, "<br>");
+      sprint1Typing = false;
+      return;
+    }
+    sprint1Idx++;
+    if (sprint1Idx < sprint1Dialogues.length) {
+      showSprint1Dialogue(sprint1Idx);
+    }
+  });
+
+  sprint1CloseBtn.addEventListener('click', () => {
+    sprint1Page.style.display = "none";
     document.getElementById('carousel-container').style.display = "flex";
     carouselEvent.focus();
   });
+
+
+  // Sprint 2 dialogue data
+  const sprint2Dialogues = [
+    {
+      name: "Yeray",
+      text: "Vam construir el nostre MVP i definir dues situacions d’ús reals."
+    },
+    {
+      name: "Yeray",
+      text: "Amb el User Story Mapping i els Journey Maps vam entendre millor el recorregut de l’usuari dins l'app."
+    }
+  ];
+  let sprint2Idx = 0;
+  const sprint2Page = document.getElementById('sprint2-page');
+  const sprint2DialogueBox = document.getElementById('sprint2-dialogue-text');
+  const sprint2NameBox = document.getElementById('sprint2-character-name');
+  const sprint2NextBtn = document.getElementById('sprint2-next-btn');
+  const sprint2CloseBtn = document.getElementById('sprint2-close');
+  const sprint2Avatar = document.getElementById('sprint2-avatar');
+
+  let sprint2Typing = false;
+  let sprint2TypingTimeout;
+
+  function typeSprint2Dialogue(text, callback) {
+    sprint2Typing = true;
+    sprint2DialogueBox.innerHTML = "";
+    let i = 0;
+    function typeChar() {
+      if (i < text.length) {
+        sprint2DialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+        if (text[i] !== " " && text[i] !== "\n") playTypeSound();
+        i++;
+        sprint2TypingTimeout = setTimeout(typeChar, 22);
+      } else {
+        sprint2Typing = false;
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  function showSprint2Dialogue(index) {
+    sprint2NameBox.textContent = sprint2Dialogues[index].name;
+    typeSprint2Dialogue(sprint2Dialogues[index].text);
+    sprint2NextBtn.style.display = (index < sprint2Dialogues.length - 1) ? "inline-block" : "none";
+    sprint2CloseBtn.style.display = (index === sprint2Dialogues.length - 1) ? "inline-block" : "none";
+  }
+
+  carouselEvent.addEventListener('click', () => {
+    if (events[eventIdx].title === "Sprint 2") {
+      sprint2Page.style.display = "flex";
+      sprint2Page.style.flexDirection = "column";
+      sprint2Page.style.alignItems = "center";
+      sprint2Page.style.justifyContent = "center";
+      document.getElementById('carousel-container').style.display = "none";
+      sprint2Idx = 0;
+      showSprint2Dialogue(sprint2Idx);
+    }
+  });
+
+  sprint2NextBtn.addEventListener('click', () => {
+    if (sprint2Typing) {
+      clearTimeout(sprint2TypingTimeout);
+      sprint2DialogueBox.innerHTML = sprint2Dialogues[sprint2Idx].text.replace(/\n/g, "<br>");
+      sprint2Typing = false;
+      return;
+    }
+    sprint2Idx++;
+    if (sprint2Idx < sprint2Dialogues.length) {
+      showSprint2Dialogue(sprint2Idx);
+    }
+  });
+
+  sprint2CloseBtn.addEventListener('click', () => {
+    sprint2Page.style.display = "none";
+    document.getElementById('carousel-container').style.display = "flex";
+    carouselEvent.focus();
+  });
+
+
+  // Sprint 3 dialogue data
+  const sprint3Dialogues = [
+    {
+      name: "Davi",
+      text: "Vam crear els dissenys de l’aplicació amb Figma."
+    },
+    {
+      name: "Davi",
+      text: "També vam definir els criteris d’acceptació de cada història per poder validar funcionalitats."
+    }
+  ];
+  let sprint3Idx = 0;
+  const sprint3Page = document.getElementById('sprint3-page');
+  const sprint3DialogueBox = document.getElementById('sprint3-dialogue-text');
+  const sprint3NameBox = document.getElementById('sprint3-character-name');
+  const sprint3NextBtn = document.getElementById('sprint3-next-btn');
+  const sprint3CloseBtn = document.getElementById('sprint3-close');
+  const sprint3Avatar = document.getElementById('sprint3-avatar');
+
+  let sprint3Typing = false;
+  let sprint3TypingTimeout;
+
+  function typeSprint3Dialogue(text, callback) {
+    sprint3Typing = true;
+    sprint3DialogueBox.innerHTML = "";
+    let i = 0;
+    function typeChar() {
+      if (i < text.length) {
+        sprint3DialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+        if (text[i] !== " " && text[i] !== "\n") playTypeSound();
+        i++;
+        sprint3TypingTimeout = setTimeout(typeChar, 22);
+      } else {
+        sprint3Typing = false;
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  function showSprint3Dialogue(index) {
+    sprint3NameBox.textContent = sprint3Dialogues[index].name;
+    typeSprint3Dialogue(sprint3Dialogues[index].text);
+    sprint3NextBtn.style.display = (index < sprint3Dialogues.length - 1) ? "inline-block" : "none";
+    sprint3CloseBtn.style.display = (index === sprint3Dialogues.length - 1) ? "inline-block" : "none";
+  }
+
+  carouselEvent.addEventListener('click', () => {
+    if (events[eventIdx].title === "Sprint 3") {
+      sprint3Page.style.display = "flex";
+      sprint3Page.style.flexDirection = "column";
+      sprint3Page.style.alignItems = "center";
+      sprint3Page.style.justifyContent = "center";
+      document.getElementById('carousel-container').style.display = "none";
+      sprint3Idx = 0;
+      showSprint3Dialogue(sprint3Idx);
+    }
+  });
+
+  sprint3NextBtn.addEventListener('click', () => {
+    if (sprint3Typing) {
+      clearTimeout(sprint3TypingTimeout);
+      sprint3DialogueBox.innerHTML = sprint3Dialogues[sprint3Idx].text.replace(/\n/g, "<br>");
+      sprint3Typing = false;
+      return;
+    }
+    sprint3Idx++;
+    if (sprint3Idx < sprint3Dialogues.length) {
+      showSprint3Dialogue(sprint3Idx);
+    }
+  });
+
+  sprint3CloseBtn.addEventListener('click', () => {
+    sprint3Page.style.display = "none";
+    document.getElementById('carousel-container').style.display = "flex";
+    carouselEvent.focus();
+  });
+
   </script>
+
 </body>
 </html>
