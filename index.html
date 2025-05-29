@@ -340,20 +340,79 @@
       </div>
     </div>
     <!-- Sprint 2 Page -->
-      <div class="sprint-page" id="sprint2-page" style="display:none;">
-        <div class="sprint2-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
-        <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
-          <img src="images/characters/avatar_yeray.jpeg" alt="Yeray" class="avatar" id="sprint2-avatar">
-          <div class="dialogue-content">
-            <div class="character-name" id="sprint2-character-name">Yeray</div>
-            <div class="dialogue" id="sprint2-dialogue-text"></div>
-            <button class="next-btn" id="sprint2-next-btn">Següent</button>
-            <button class="next-btn" id="sprint2-close" style="display:none; margin-left:8px;">Tornar</button>
-          </div>
+    <div class="sprint-page" id="sprint2-page" style="display:none;">
+      <div class="sprint2-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+        <img src="images/characters/avatar_yeray.jpeg" alt="Yeray" class="avatar" id="sprint2-avatar">
+        <div class="dialogue-content">
+          <div class="character-name" id="sprint2-character-name">Yeray</div>
+          <div class="dialogue" id="sprint2-dialogue-text"></div>
+          <button class="next-btn" id="sprint2-next-btn">Següent</button>
+          <button class="next-btn" id="sprint2-close" style="display:none; margin-left:8px;">Tornar</button>
         </div>
-      </div>   
-      <!-- Sprint 3 Page -->
+      </div>
+    </div> 
+      
+    <!-- Reunió Page -->
+    <div class="sprint-page" id="reunio-page" style="display:none;">
+      <div class="reunio-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+        <img src="images/characters/avatar_ferran.jpeg" alt="Ferran" class="avatar" id="reunio-avatar">
+        <div class="dialogue-content">
+          <div class="character-name" id="reunio-character-name">Ferran</div>
+          <div class="dialogue" id="reunio-dialogue-text"></div>
+          <button class="next-btn" id="reunio-next-btn">Següent</button>
+          <button class="next-btn" id="reunio-close" style="display:none; margin-left:8px;">Tornar</button>
+        </div>
+      </div>    
+    </div>
+
+    <!-- Sprint 3 Page -->
+    <div class="sprint-page" id="sprint3-page" style="display:none;">
+      <div class="sprint3-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+        <img src="images/characters/avatar_davi.jpeg" alt="Davi" class="avatar" id="sprint3-avatar">
+        <div class="dialogue-content">
+          <div class="character-name" id="sprint3-character-name">Davi</div>
+          <div class="dialogue" id="sprint3-dialogue-text"></div>
+          <button class="next-btn" id="sprint3-next-btn">Següent</button>
+          <button class="next-btn" id="sprint3-close" style="display:none; margin-left:8px;">Tornar</button>
+        </div>
+      </div>
+    </div>
+
+
   <audio id="type-sound" src="audios/typewriter-key.wav" preload="auto"></audio>
+
+
+    <!-- Sprint 4 Page -->
+    <div class="sprint-page" id="sprint4-page" style="display:none;">
+      <div class="sprint4-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+        <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar" id="sprint4-avatar">
+        <div class="dialogue-content">
+          <div class="character-name" id="sprint4-character-name">Cinta</div>
+          <div class="dialogue" id="sprint4-dialogue-text"></div>
+          <button class="next-btn" id="sprint4-next-btn">Següent</button>
+          <button class="next-btn" id="sprint4-close" style="display:none; margin-left:8px;">Tornar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Page -->
+    <div class="sprint-page" id="demo-page" style="display:none;">
+      <div class="demo-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+        <img src="images/characters/avatar_toni.png" alt="Toni" class="avatar" id="demo-avatar">
+        <div class="dialogue-content">
+          <div class="character-name" id="demo-character-name">Toni</div>
+          <div class="dialogue" id="demo-dialogue-text"></div>
+          <button class="next-btn" id="demo-next-btn">Següent</button>
+          <button class="next-btn" id="demo-close" style="display:none; margin-left:8px;">Tornar</button>
+        </div>
+      </div>
+    </div>
+
 
   <script>
   // Dialogues for Cinta
@@ -842,6 +901,254 @@
     document.getElementById('carousel-container').style.display = "flex";
     carouselEvent.focus();
   });
+
+  // Sprint 4 dialogue data
+  const sprint4Dialogues = [
+    {
+      name: "Cinta",
+      text: "Finalment vam preparar la demo, el vídeo final, i aquesta presentació interactiva!"
+    },
+    {
+      name: "Cinta",
+      text: "Aquí pots veure una captura de Trello amb totes les tasques i etiquetes."
+    }
+  ];
+  let sprint4Idx = 0;
+  const sprint4Page = document.getElementById('sprint4-page');
+  const sprint4DialogueBox = document.getElementById('sprint4-dialogue-text');
+  const sprint4NameBox = document.getElementById('sprint4-character-name');
+  const sprint4NextBtn = document.getElementById('sprint4-next-btn');
+  const sprint4CloseBtn = document.getElementById('sprint4-close');
+  const sprint4Avatar = document.getElementById('sprint4-avatar');
+
+  let sprint4Typing = false;
+  let sprint4TypingTimeout;
+
+  function typeSprint4Dialogue(text, callback) {
+    sprint4Typing = true;
+    sprint4DialogueBox.innerHTML = "";
+    let i = 0;
+    function typeChar() {
+      if (i < text.length) {
+        sprint4DialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+        if (text[i] !== " " && text[i] !== "\n") playTypeSound();
+        i++;
+        sprint4TypingTimeout = setTimeout(typeChar, 22);
+      } else {
+        sprint4Typing = false;
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  function showSprint4Dialogue(index) {
+    sprint4NameBox.textContent = sprint4Dialogues[index].name;
+    typeSprint4Dialogue(sprint4Dialogues[index].text);
+    sprint4NextBtn.style.display = (index < sprint4Dialogues.length - 1) ? "inline-block" : "none";
+    sprint4CloseBtn.style.display = (index === sprint4Dialogues.length - 1) ? "inline-block" : "none";
+  }
+
+  carouselEvent.addEventListener('click', () => {
+    if (events[eventIdx].title === "Sprint 4") {
+      sprint4Page.style.display = "flex";
+      sprint4Page.style.flexDirection = "column";
+      sprint4Page.style.alignItems = "center";
+      sprint4Page.style.justifyContent = "center";
+      document.getElementById('carousel-container').style.display = "none";
+      sprint4Idx = 0;
+      showSprint4Dialogue(sprint4Idx);
+    }
+  });
+
+  sprint4NextBtn.addEventListener('click', () => {
+    if (sprint4Typing) {
+      clearTimeout(sprint4TypingTimeout);
+      sprint4DialogueBox.innerHTML = sprint4Dialogues[sprint4Idx].text.replace(/\n/g, "<br>");
+      sprint4Typing = false;
+      return;
+    }
+    sprint4Idx++;
+    if (sprint4Idx < sprint4Dialogues.length) {
+      showSprint4Dialogue(sprint4Idx);
+    }
+  });
+
+  sprint4CloseBtn.addEventListener('click', () => {
+    sprint4Page.style.display = "none";
+    document.getElementById('carousel-container').style.display = "flex";
+    carouselEvent.focus();
+  });
+
+
+  // Reunió dialogue data
+const reunioDialogues = [
+  {
+    name: "Ferran",
+    text: "Durant el tercer sprint vam tenir algunes dificultats organitzatives..."
+  },
+  {
+    name: "Ferran",
+    text: "Ens vam adonar que no estàvem comunicant-nos prou bé, i algunes tasques s’estaven solapant o quedant penjades."
+  },
+  {
+    name: "Ferran",
+    text: "La reunió amb el professor ens va ajudar a realinear-nos, repartir millor les responsabilitats i millorar la comunicació."
+  }
+];
+let reunioIdx = 0;
+const reunioPage = document.getElementById('reunio-page');
+const reunioDialogueBox = document.getElementById('reunio-dialogue-text');
+const reunioNameBox = document.getElementById('reunio-character-name');
+const reunioNextBtn = document.getElementById('reunio-next-btn');
+const reunioCloseBtn = document.getElementById('reunio-close');
+const reunioAvatar = document.getElementById('reunio-avatar');
+
+let reunioTyping = false;
+let reunioTypingTimeout;
+
+function typeReunioDialogue(text, callback) {
+  reunioTyping = true;
+  reunioDialogueBox.innerHTML = "";
+  let i = 0;
+  function typeChar() {
+    if (i < text.length) {
+      reunioDialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+      if (text[i] !== " " && text[i] !== "\n") playTypeSound();
+      i++;
+      reunioTypingTimeout = setTimeout(typeChar, 22);
+    } else {
+      reunioTyping = false;
+      if (callback) callback();
+    }
+  }
+  typeChar();
+}
+
+function showReunioDialogue(index) {
+  reunioNameBox.textContent = reunioDialogues[index].name;
+  typeReunioDialogue(reunioDialogues[index].text);
+  reunioNextBtn.style.display = (index < reunioDialogues.length - 1) ? "inline-block" : "none";
+  reunioCloseBtn.style.display = (index === reunioDialogues.length - 1) ? "inline-block" : "none";
+}
+
+carouselEvent.addEventListener('click', () => {
+  if (events[eventIdx].title === "Reunió") {
+    reunioPage.style.display = "flex";
+    reunioPage.style.flexDirection = "column";
+    reunioPage.style.alignItems = "center";
+    reunioPage.style.justifyContent = "center";
+    document.getElementById('carousel-container').style.display = "none";
+    reunioIdx = 0;
+    showReunioDialogue(reunioIdx);
+  }
+});
+
+reunioNextBtn.addEventListener('click', () => {
+  if (reunioTyping) {
+    clearTimeout(reunioTypingTimeout);
+    reunioDialogueBox.innerHTML = reunioDialogues[reunioIdx].text.replace(/\n/g, "<br>");
+    reunioTyping = false;
+    return;
+  }
+  reunioIdx++;
+  if (reunioIdx < reunioDialogues.length) {
+    showReunioDialogue(reunioIdx);
+  }
+});
+
+reunioCloseBtn.addEventListener('click', () => {
+  reunioPage.style.display = "none";
+  document.getElementById('carousel-container').style.display = "flex";
+  carouselEvent.focus();
+});
+
+
+// Demo dialogue data
+const demoDialogues = [
+  {
+    name: "Toni",
+    text: "Ha arribat el moment més esperat: la demostració de Hyperfit!"
+  },
+  {
+    name: "Toni",
+    text: "A continuació podreu veure com funciona l’aplicació que hem desenvolupat durant tot el semestre."
+  },
+  {
+    name: "Toni",
+    text: "Gràcies per acompanyar-nos en aquest viatge. Esperem que us agradi la demo!"
+  }
+];
+let demoIdx = 0;
+const demoPage = document.getElementById('demo-page');
+const demoDialogueBox = document.getElementById('demo-dialogue-text');
+const demoNameBox = document.getElementById('demo-character-name');
+const demoNextBtn = document.getElementById('demo-next-btn');
+const demoCloseBtn = document.getElementById('demo-close');
+const demoAvatar = document.getElementById('demo-avatar');
+
+let demoTyping = false;
+let demoTypingTimeout;
+
+function typeDemoDialogue(text, callback) {
+  demoTyping = true;
+  demoDialogueBox.innerHTML = "";
+  let i = 0;
+  function typeChar() {
+    if (i < text.length) {
+      demoDialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+      if (text[i] !== " " && text[i] !== "\n") playTypeSound();
+      i++;
+      demoTypingTimeout = setTimeout(typeChar, 22);
+    } else {
+      demoTyping = false;
+      if (callback) callback();
+    }
+  }
+  typeChar();
+}
+
+function showDemoDialogue(index) {
+  demoNameBox.textContent = demoDialogues[index].name;
+  typeDemoDialogue(demoDialogues[index].text);
+  demoNextBtn.style.display = (index < demoDialogues.length - 1) ? "inline-block" : "none";
+  demoCloseBtn.style.display = (index === demoDialogues.length - 1) ? "inline-block" : "none";
+}
+
+carouselEvent.addEventListener('click', () => {
+  if (events[eventIdx].title === "Demo") {
+    demoPage.style.display = "flex";
+    demoPage.style.flexDirection = "column";
+    demoPage.style.alignItems = "center";
+    demoPage.style.justifyContent = "center";
+    document.getElementById('carousel-container').style.display = "none";
+    demoIdx = 0;
+    showDemoDialogue(demoIdx);
+  }
+});
+
+demoNextBtn.addEventListener('click', () => {
+  if (demoTyping) {
+    clearTimeout(demoTypingTimeout);
+    demoDialogueBox.innerHTML = demoDialogues[demoIdx].text.replace(/\n/g, "<br>");
+    demoTyping = false;
+    return;
+  }
+  demoIdx++;
+  if (demoIdx < demoDialogues.length) {
+    showDemoDialogue(demoIdx);
+  }
+});
+
+demoCloseBtn.addEventListener('click', () => {
+  demoPage.style.display = "none";
+  document.getElementById('carousel-container').style.display = "flex";
+  carouselEvent.focus();
+});
+</script>
+
+
+
 
   </script>
 
