@@ -316,8 +316,8 @@
       </div>
     </div>
     <!-- Sprint 1 Page -->
-     <div class="sprint-page" id="sprint1-page" style="display:none;">
-      <div class="sprint1-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+    <div class="sprint-page" id="sprint1-page" style="display:none;">
+      <div class="sprint1-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/post-its.jpg') center/cover no-repeat; z-index:-1;"></div>
       <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
         <img src="images/characters/avatar_men.jpeg" alt="Men" class="avatar" id="sprint1-avatar">
         <div class="dialogue-content">
@@ -327,6 +327,16 @@
           <button class="next-btn" id="sprint1-close" style="display:none; margin-left:8px;">Tornar</button>
         </div>
       </div>
+      <!-- Central buttons for documents -->
+      <div style="position:absolute; top:20%; left:0; right:0; display:flex; flex-direction:row; align-items:center; justify-content:center; z-index:2; gap:32px;">
+        <button id="btn-product-canvas"
+          style="background:#ffb300; color:#000000; border:none; border-radius:12px; padding:18px 38px; font-size:1.2em; cursor:pointer; box-shadow:0 2px 8px #bbb; position:relative; left:-120px;">
+          Veure Product Canvas
+        </button>
+        <button id="btn-especificacio"
+          style="background:#daf414; color:#000000; border:none; border-radius:12px; padding:18px 38px; font-size:1.2em; cursor:pointer; box-shadow:0 2px 8px #bbb; text-align: center; right:60px; margin-top:190px">
+          Veure Especificació<br/>de Requisits
+        </button>
       </div>
     </div>
     <!-- Sprint 2 Page -->
@@ -438,7 +448,7 @@
     },
     { title: "Sprint 1", 
       desc: "Concepció i disseny del projecte",
-      img: "images/backgrounds/campus.jpg",
+      img: "images/backgrounds/post-its.jpg",
     },
 
     { title: "Sprint 2", desc: "MVP i feedback dels usuaris" },
@@ -495,6 +505,14 @@
     document.getElementById('carousel-container').style.display = "flex";
     carouselEvent.focus();
   });
+
+  // Sprint 1 buttons open files
+  document.getElementById('btn-product-canvas').onclick = function() {
+    window.open('images/projects/product_canvas.jpg', '_blank');
+  };
+  document.getElementById('btn-especificacio').onclick = function() {
+    window.open('documents/Especificació de requisits - Hyperfit.pdf', '_blank');
+  };
 
   // Also allow keyboard navigation
   carouselEvent.addEventListener('keydown', (e) => {
