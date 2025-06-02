@@ -436,6 +436,10 @@
           <button class="next-btn" id="sprint3-close" style="display:none; margin-left:8px;">Tornar</button>
         </div>
       </div>
+        <div id="sprint3-image-container" style="display:none; text-align:center; margin-top:24px;">
+          <img id="sprint3-image" src="" alt="Sprint 3 Visual" style="max-width:420px; border-radius:12px; box-shadow:0 2px 12px #bbb;">
+          <div id="sprint3-image-caption" style="color:#555; font-size:1em; margin-top:8px;"></div>
+      </div>
     </div>
 
 
@@ -571,10 +575,21 @@
       desc: "MVP i feedback dels usuaris",
       img:  "images/backgrounds/creacio-MVP.jpg"
     },
-    { title: "Reunió", desc: "Resolució de problemes d’organització" },
-    { title: "Sprint 3", desc: "Implementació i criteris d’acceptació" },
-    { title: "Sprint 4", desc: "Entrega final, demo i Trello" },
-    { title: "Demo", desc: "Presentació final del projecte" }
+    { title: "Reunió", 
+      desc: "Resolució de problemes d’organització", 
+      img: "images/backgrounds/reunio.jpg"}, //cambiar nombre 
+
+    { title: "Sprint 3", 
+      desc: "Implementació i criteris d’acceptació",
+      img : "images/backgrounds/criteris.jpg"}, //cambiar nombre
+
+    { title: "Sprint 4", 
+      desc: "Entrega final, demo i Trello",
+      img: "images/backgrounds/figma.jpg"}, //cambiar nombre
+
+    { title: "Demo", 
+      desc: "Presentació final del projecte",
+      img: "images/backgrounds/campus.jpg"}, // cambiar nombre
   ];
   let eventIdx = 0;
   const carouselContainer = document.getElementById('carousel-container');
@@ -929,7 +944,20 @@
     typeSprint3Dialogue(sprint3Dialogues[index].text);
     sprint3NextBtn.style.display = (index < sprint3Dialogues.length - 1) ? "inline-block" : "none";
     sprint3CloseBtn.style.display = (index === sprint3Dialogues.length - 1) ? "inline-block" : "none";
+    // Mostrar imagen solo en el segundo diálogo
+    const imgContainer = document.getElementById('sprint3-image-container');
+    const img = document.getElementById('sprint3-image');
+    const caption = document.getElementById('sprint3-image-caption');
+    if (index === 0) {
+      imgContainer.style.display = "none";
+    } else if (index === 1) {
+      img.src = "images/projects/figma-captura.jpg"; // Cambia por tu ruta real
+      caption.textContent = "Disseny de l'app a Figma";
+      imgContainer.style.display = "block";
+  } else {
+      imgContainer.style.display = "none";
   }
+}
 
   carouselEvent.addEventListener('click', () => {
     if (events[eventIdx].title === "Sprint 3") {
@@ -1171,7 +1199,14 @@ function typeDemoDialogue(text, callback) {
 function showDemoDialogue(index) {
   demoNameBox.textContent = demoDialogues[index].name;
   typeDemoDialogue(demoDialogues[index].text);
-  demoNextBtn.style.display = (index < demoDialogues.length - 1) ? "inline-block" : "none";
+  // Mostra el botó "Següent" sempre, també a l'últim diàleg
+  demoNextBtn.style.display = "inline-block";
+  // Opcional: canvia el text del botó a l'últim diàleg
+  if (index === demoDialogues.length - 1) {
+    demoNextBtn.textContent = "Figma";
+  } else {
+    demoNextBtn.textContent = "Següent";
+  }
   demoCloseBtn.style.display = (index === demoDialogues.length - 1) ? "inline-block" : "none";
 }
 
@@ -1197,6 +1232,9 @@ demoNextBtn.addEventListener('click', () => {
   demoIdx++;
   if (demoIdx < demoDialogues.length) {
     showDemoDialogue(demoIdx);
+  } else {
+    // Abrir Figma aquí, acción directa del usuario
+    window.open('https://www.figma.com/proto/ibH8mfDIIyRyINgMWlI64H/ENBIDIA-figma?node-id=4-145&starting-point-node-id=4%3A145', '_blank');
   }
 });
 
