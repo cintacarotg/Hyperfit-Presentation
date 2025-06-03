@@ -466,9 +466,9 @@
     <!-- Sprint 3 Page -->
     <div class="sprint-page" id="sprint3-page" style="display:none;">
       <div class="sprint3-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/implementacio.jpg') center/cover no-repeat; z-index:-1;"></div>
-      <!-- Place this block as the FIRST element inside the Sprint 3 Page, before the .character-box -->
+      <!-- Image and button side by side, button centered and separated -->
       <div id="sprint3-image-container"
-           style="position:absolute; top:80px; left:40px; z-index:2; display:flex; align-items:flex-start;">
+           style="position:absolute; top:80px; left:40px; z-index:2; display:flex; align-items:center; gap:64px;">
         <img
           id="sprint3-image"
           src="images/projects/figma.jpg"
@@ -476,6 +476,12 @@
           style="max-width:240px; border-radius:16px; box-shadow:0 2px 12px #bbb; cursor:pointer; transition: box-shadow 0.2s;"
           onclick="window.open('https://www.figma.com/proto/ibH8mfDIIyRyINgMWlI64H/ENBIDIA-figma?node-id=4-145&starting-point-node-id=4%3A145', '_blank');"
         >
+        <div style="display:flex; flex-direction:column; justify-content:center; height:100%; margin-left: 120px;">
+          <button id="btn-criteris-acceptacio"
+            style="background: #c569f3; color:#ffffff; border:none; border-radius:12px; padding:16px 32px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive; box-shadow:0 2px 8px #bbb; cursor:pointer;">
+            Veure Criteris d'Acceptació
+          </button>
+        </div>
       </div>
       <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
         <img src="images/characters/avatar_davi.jpeg" alt="Davi" class="avatar" id="sprint3-avatar">
@@ -485,16 +491,6 @@
           <button class="next-btn" id="sprint3-next-btn">Següent</button>
           <button class="next-btn" id="sprint3-close" style="display:none; margin-left:8px;">Tornar</button>
         </div>
-      </div>
-      <!-- Add this button inside the Sprint 3 Page, after the character-box and before the image container -->
-      <div style="width:100%; display:flex; justify-content:flex-start; margin-top:24px; margin-left:40px;">
-        <button id="btn-criteris-acceptacio"
-          style="background: #c569f3; color:#ffffff; border:none; border-radius:12px; padding:16px 32px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive; box-shadow:0 2px 8px #bbb; cursor:pointer;">
-          Veure Criteris d'Acceptació
-        </button>
-      </div>
-      <div id="sprint3-image-container" style="display:none; text-align:center; margin-top:24px;">
-        <img id="sprint3-image" src="" alt="Sprint 3 Visual" style="max-width:420px; border-radius:12px; box-shadow:0 2px 12px #bbb;">
       </div>
       <!-- Add button to return to carousel -->
       <button class="btn-to-carousel" onclick="goToCarousel()">
@@ -508,7 +504,7 @@
 
     <!-- Sprint 4 Page -->
     <div class="sprint-page" id="sprint4-page" style="display:none;">
-      <div class="sprint4-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="sprint4-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/gym_app.jpg') center/cover no-repeat; z-index:-1;"></div>
       <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
         <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar" id="sprint4-avatar">
         <div class="dialogue-content">
@@ -519,6 +515,12 @@
         </div>
       </div>
       <!-- Add button to return to carousel -->
+      <div style="width:100%; display:flex; justify-content:center; margin-top:24px;">
+        <button id="btn-trello"
+          style="background: #c569f3; color:#fff; border:none; border-radius:12px; padding:16px 32px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-weight:normal; letter-spacing:0.01em; box-shadow:0 2px 8px #bbb; cursor:pointer;">
+          Veure Trello
+        </button>
+      </div>
       <button class="btn-to-carousel" onclick="goToCarousel()">
         ⬅ Torna al Carrusel
       </button>
@@ -656,7 +658,7 @@
 
     { title: "Sprint 4", 
       desc: "Entrega final, demo i Trello",
-      img: "images/backgrounds/figma.jpg"
+      img: "images/backgrounds/gym_app.jpg"
     },
 
     { title: "Demo", 
@@ -1131,6 +1133,10 @@
     carouselEvent.focus();
   });
 
+  // Make sure this code is present and correct:
+document.getElementById('btn-trello').onclick = function() {
+  window.open('images/projects/trello.jpg', '_blank');
+};
 
   // Reunió dialogue data
 const reunioDialogues = [
@@ -1341,6 +1347,7 @@ document.getElementById('btn-criteris-acceptacio').onclick = function() {
 document.getElementById('btn-figma').onclick = function() {
   window.open('https://www.figma.com/proto/ibH8mfDIIyRyINgMWlI64H/ENBIDIA-figma?node-id=4-145&starting-point-node-id=4%3A145', '_blank');
 };
+
 </script>
 
 
