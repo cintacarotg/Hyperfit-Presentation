@@ -1180,7 +1180,7 @@ const reunioDialogues = [
   },
   {
     name: "Toni",
-    text: "Per sort, vau tenir una reunió amb mi i vam tornar encaminar el vostre producte."
+    text: "Vau tenir una reunió amb mi i vam tornar a encaminar el vostre producte."
   },
   {
     name: "Ferran",
@@ -1237,6 +1237,7 @@ function showReunioDialogue(index) {
   const ferranName = document.getElementById('reunio-character-name');
   const ferranText = document.getElementById('reunio-dialogue-text');
   const ferranNextBtn = document.getElementById('reunio-next-btn');
+  const reunioCloseBtn = document.getElementById('reunio-close');
 
   const dialogue = reunioDialogues[index];
 
@@ -1245,13 +1246,12 @@ function showReunioDialogue(index) {
     toniName.textContent = dialogue.name;
     toniText.innerHTML = "";
     typeReunioDialogue(dialogue.text, null, toniText);
-    ferranBox.style.visibility = "hidden";
-    // Mostra el botó "Següent" només si no és l'últim diàleg
+    ferranBox.style.display = "none";
     toniNextBtn.style.display = (index < reunioDialogues.length - 1) ? "inline-block" : "none";
     ferranNextBtn.style.display = "none";
   } else {
     toniBox.style.display = "none";
-    ferranBox.style.visibility = "visible";
+    ferranBox.style.display = "flex";
     ferranName.textContent = dialogue.name;
     typeReunioDialogue(dialogue.text, null, ferranText);
     toniNextBtn.style.display = "none";
@@ -1285,7 +1285,7 @@ reunioNextBtn.addEventListener('click', () => {
   }
 });
 
-reunioToniNextBtn.addEventListener('click', () => {
+document.getElementById('reunio-toni-next-btn').addEventListener('click', () => {
   if (reunioTyping) {
     clearTimeout(reunioTypingTimeout);
     document.getElementById('reunio-toni-dialogue-text').innerHTML = reunioDialogues[reunioIdx].text.replace(/\n/g, "<br>");
