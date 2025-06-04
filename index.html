@@ -159,18 +159,35 @@
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       z-index: 10;
-      background: rgba(255,255,255,0.96);
+      background: url('images/backgrounds/peses.jpg') center/cover no-repeat, rgba(255,255,255,0.96);
     }
     .carousel-title {
-      font-size: 2.2em;
+      position: relative;
+      z-index: 2;
       color: #c569f3;
+      text-align: center;
       margin-bottom: 32px;
+      padding-top: 26px;
+      font-size: 2.8em;
       font-weight: bold;
+      background: none;
+    }
+    .carousel-title-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 540px;
+      height: 80px;
+      background: rgba(255,255,255,0.93);
+      border-radius: 24px;
+      box-shadow: 0 4px 24px #bbb;
+      z-index: 1;
     }
     .carousel {
       display: flex;
       align-items: center;
-      gap: 48px;
+      gap: 72px;
     }
     .carousel-button {
       background: #c569f3;
@@ -188,8 +205,8 @@
       background: #a13dc9;
     }
     .carousel-event {
-      min-width: 350px;
-      min-height: 180px;
+      min-width: 500px;
+      min-height: 260px;
       background: #f5e6fc;
       border-radius: 18px;
       box-shadow: 0 0 16px #bbb;
@@ -197,9 +214,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 48px 56px;
-      font-size: 2em;
-      color: #222;
+      padding: 64px 80px;
+      font-size: 2.5em;
+      color: #c569f3;
       cursor: pointer;
       transition: transform 0.15s, box-shadow 0.15s;
       position: relative;
@@ -213,9 +230,9 @@
     }
     .carousel-event img {
       width: auto;
-      height: 120px;
-      max-width: 220px;
-      margin-bottom: 16px;
+      height: 170px;
+      max-width: 320px;
+      margin-bottom: 24px;
       display: block;
       object-fit: contain;
     }
@@ -342,7 +359,10 @@
     </div>
     <!-- Carousel Container -->
     <div class="carousel-container" id="carousel-container">
-      <div class="carousel-title">Etapes del projecte</div>
+      <div style="position:relative; width:100%; display:flex; flex-direction:column; align-items:center;">
+        <div class="carousel-title">Etapes del projecte</div>
+        <div class="carousel-title-bg"></div>
+      </div>
       <div class="carousel">
         <button id="carousel-prev" class="carousel-button">&#8592;</button>
         <div id="carousel-event" class="carousel-event" tabindex="0"></div>
