@@ -254,7 +254,7 @@
       box-shadow: 0 2px 8px #bbb;
     }
 
-    /* Update the style for the two buttons: "Torna al Carrusel" and "Veure Criteris d'Acceptació (PDF)" */
+    /* Update the style for the two buttons: "Etapes del projecte" and "Veure Criteris d'Acceptació (PDF)" */
     .btn-to-carousel,
     #btn-criteris-acceptacio {
       font-family: inherit !important; /* Use the same font as the dialogs */
@@ -363,7 +363,7 @@
       </div>
       <!-- Add button to return to carousel -->
       <button class="btn-to-carousel" onclick="goToCarousel()">
-        ⬅ Torna al Carrusel
+        ⬅ Etapes del projecte
       </button>
     </div>
     <!-- Sprint 1 Page -->
@@ -391,7 +391,7 @@
       </div>
       <!-- Add button to return to carousel -->
       <button class="btn-to-carousel" onclick="goToCarousel()">
-        ⬅ Torna al Carrusel
+        ⬅ Etapes del projecte
       </button>
     </div>
     <!-- Sprint 2 Page -->
@@ -480,7 +480,7 @@
       </div>    
       <!-- Add button to return to carousel -->
       <button class="btn-to-carousel" onclick="goToCarousel()">
-        ⬅ Torna al Carrusel
+        ⬅ Etapes del projecte
       </button>
     </div>
 
@@ -515,7 +515,7 @@
       </div>
       <!-- Add button to return to carousel -->
       <button class="btn-to-carousel" onclick="goToCarousel()">
-        ⬅ Torna al Carrusel
+        ⬅ Etapes del projecte
       </button>
     </div>
 
@@ -549,11 +549,11 @@
 
     <!-- Demo Page -->
     <div class="sprint-page" id="demo-page" style="display:none;">
-      <div class="demo-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/campus.jpg') center/cover no-repeat; z-index:-1;"></div>
+      <div class="demo-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/go-gym.jpg') center/cover no-repeat; z-index:-1;"></div>
       <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
-        <img src="images/characters/avatar_toni.png" alt="Toni" class="avatar" id="demo-avatar">
+        <img src="images/characters/avatar_davi.jpeg" alt="Davi" class="avatar" id="demo-avatar">
         <div class="dialogue-content">
-          <div class="character-name" id="demo-character-name">Toni</div>
+          <div class="character-name" id="demo-character-name">Davi</div>
           <div class="dialogue" id="demo-dialogue-text"></div>
           <button class="next-btn" id="demo-next-btn">Següent</button>
           <button class="next-btn" id="demo-close" style="display:none; margin-left:8px;">Tornar</button>
@@ -561,7 +561,7 @@
       </div>
       <!-- Add button to return to carousel -->
       <button class="btn-to-carousel" onclick="goToCarousel()">
-        ⬅ Torna al Carrusel
+        ⬅ Etapes del projecte
       </button>
     </div>
 
@@ -650,7 +650,7 @@
     }
   });
 
-  // Carousel data (add image for Sprint 0)
+  // Carousel data
   const events = [
     { 
       title: "Sprint 0", 
@@ -678,13 +678,13 @@
     },
 
     { title: "Sprint 4", 
-      desc: "Entrega final, demo i Trello",
+      desc: "Entrega final i Trello",
       img: "images/backgrounds/gym_app.jpg"
     },
 
     { title: "Demo", 
       desc: "Presentació final del projecte",
-      img: "images/backgrounds/campus.jpg"
+      img: "images/backgrounds/go-gym.jpg"
     }
   ];
   let eventIdx = 0;
@@ -1080,7 +1080,7 @@
   const sprint4Dialogues = [
     {
       name: "Cinta",
-      text: "Finalment vam preparar la demo, el vídeo final, i aquesta presentació interactiva!"
+      text: "Finalment vam preparar la demo i aquesta presentació interactiva!"
     },
     {
       name: "Cinta",
@@ -1263,16 +1263,16 @@ reunioCloseBtn.addEventListener('click', () => {
 // Demo dialogue data
 const demoDialogues = [
   {
-    name: "Toni",
+    name: "Davi",
     text: "Ha arribat el moment més esperat: la demostració de Hyperfit!"
   },
   {
-    name: "Toni",
-    text: "A continuació podreu veure com funciona l’aplicació que hem desenvolupat durant tot el semestre."
+    name: "Davi",
+    text: "A continuació podreu veure com funciona l’aplicació que hem desenvolupat durant les últimes setmanes."
   },
   {
-    name: "Toni",
-    text: "Gràcies per acompanyar-nos en aquest viatge. Esperem que us agradi la demo!"
+    name: "Davi",
+    text: "Gràcies per acompanyar-nos en aquest viatge. Esperem que us agradi!"
   }
 ];
 let demoIdx = 0;
@@ -1307,15 +1307,11 @@ function typeDemoDialogue(text, callback) {
 function showDemoDialogue(index) {
   demoNameBox.textContent = demoDialogues[index].name;
   typeDemoDialogue(demoDialogues[index].text);
-  // Mostra el botó "Següent" sempre, també a l'últim diàleg
-  demoNextBtn.style.display = "inline-block";
-  // Opcional: canvia el text del botó a l'últim diàleg
-  if (index === demoDialogues.length - 1) {
-    demoNextBtn.textContent = "Figma";
-  } else {
-    demoNextBtn.textContent = "Següent";
-  }
-  demoCloseBtn.style.display = (index === demoDialogues.length - 1) ? "inline-block" : "none";
+  // Mostra el botó "Següent" només si no és l'últim diàleg
+  demoNextBtn.style.display = (index < demoDialogues.length - 1) ? "inline-block" : "none";
+  demoNextBtn.textContent = "Següent";
+  // Amaga el botó "Tornar"
+  demoCloseBtn.style.display = "none";
 }
 
 carouselEvent.addEventListener('click', () => {
@@ -1340,8 +1336,6 @@ demoNextBtn.addEventListener('click', () => {
   demoIdx++;
   if (demoIdx < demoDialogues.length) {
     showDemoDialogue(demoIdx);
-  } else {
-    window.open('https://www.figma.com/proto/ibH8mfDIIyRyINgMWlI64H/ENBIDIA-figma?node-id=4-145&starting-point-node-id=4%3A145', '_blank');
   }
 });
 
