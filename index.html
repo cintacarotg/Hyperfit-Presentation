@@ -30,7 +30,7 @@
       width: 100vw;
       position: absolute;
       top: 0; left: 0;
-      background: rgba(255,255,255,0.92);
+      background: url('images/backgrounds/peses.jpg') center/cover no-repeat, rgba(255,255,255,0.92);
       z-index: 2;
     }
     .presentation-title {
@@ -249,7 +249,7 @@
       border-radius: 8px;
       padding: 8px 18px;
       font-size: 1em;
-      font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+      font-family: 'Segoe UI', cursive;
       cursor: pointer;
       box-shadow: 0 2px 8px #bbb;
     }
@@ -262,46 +262,68 @@
       letter-spacing: 0.01em;
       font-weight: normal;
     }
+
+    /* New styles for the presentation screen content */
+    .presentation-content {
+      background: rgba(255,255,255,0.93);
+      border-radius: 32px;
+      box-shadow: 0 4px 32px #bbb;
+      padding: 32px 64px 24px 64px;
+      margin-bottom: 2em;
+      max-width: 1100px;
+      width: 90vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
   <div class="overlay">
     <!-- Presentation Screen -->
     <div class="presentation-screen" id="presentation-screen">
-      <div class="presentation-title">Hyperfit</div>
-      <div class="presentation-team">Equip: ENBIDIA</div>
-      <div class="avatars-row">
-        <!-- Team members group -->
-        <div style="display: flex; gap: 36px; margin-right: 60px;">
-          <div class="avatar-block">
-            <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar-pres">
-            <div class="avatar-name">Cinta</div>
-          </div>
-          <div class="avatar-block">
-            <img src="images/characters/avatar_davi.jpeg" alt="Davi" class="avatar-pres">
-            <div class="avatar-name">Davi</div>
-          </div>
-          <div class="avatar-block">
-            <img src="images/characters/avatar_ivan.jpeg" alt="Ivan" class="avatar-pres">
-            <div class="avatar-name">Ivan</div>
-          </div>
-          <div class="avatar-block">
-            <img src="images/characters/avatar_yeray.jpeg" alt="Yeray" class="avatar-pres">
-            <div class="avatar-name">Yeray</div>
-          </div>
-          <div class="avatar-block">
-            <img src="images/characters/avatar_ferran.jpeg" alt="Ferran" class="avatar-pres">
-            <div class="avatar-name">Ferran</div>
-          </div>
-          <div class="avatar-block">
-            <img src="images/characters/avatar_men.jpeg" alt="Men" class="avatar-pres">
-            <div class="avatar-name">Men</div>
-          </div>
+      <!-- New content wrapper -->
+      <div class="presentation-content">
+        <div class="presentation-title">Hyperfit</div>
+        <div style="font-size: 1.1em; color: #444; text-align: center; max-width: 700px; margin-bottom: 1.2em;">
+          Descobreix la teva rutina d'exercicis amb IA!<br>
+          Explora el nostre projecte, l'equip i totes les etapes del desenvolupament.<br>
+          Fes clic a <b>Començar</b> per iniciar!
         </div>
-        <!-- Teacher separated -->
-        <div class="avatar-block" style="margin-left: 60px;">
-          <img src="images/characters/avatar_toni.png" alt="Toni" class="avatar-pres">
-          <div class="avatar-name">Toni</div>
+        <div class="presentation-team" style="margin-bottom: 1.5em;">Equip: ENBIDIA</div>
+        <div class="avatars-row" style="margin-top: 0;">
+          <!-- Team members group -->
+          <div style="display: flex; gap: 36px; margin-right: 60px;">
+            <div class="avatar-block">
+              <img src="images/characters/avatar_cinta.png" alt="Cinta" class="avatar-pres">
+              <div class="avatar-name">Cinta</div>
+            </div>
+            <div class="avatar-block">
+              <img src="images/characters/avatar_davi.jpeg" alt="Davi" class="avatar-pres">
+              <div class="avatar-name">Davi</div>
+            </div>
+            <div class="avatar-block">
+              <img src="images/characters/avatar_ivan.jpeg" alt="Ivan" class="avatar-pres">
+              <div class="avatar-name">Ivan</div>
+            </div>
+            <div class="avatar-block">
+              <img src="images/characters/avatar_yeray.jpeg" alt="Yeray" class="avatar-pres">
+              <div class="avatar-name">Yeray</div>
+            </div>
+            <div class="avatar-block">
+              <img src="images/characters/avatar_ferran.jpeg" alt="Ferran" class="avatar-pres">
+              <div class="avatar-name">Ferran</div>
+            </div>
+            <div class="avatar-block">
+              <img src="images/characters/avatar_men.jpeg" alt="Men" class="avatar-pres">
+              <div class="avatar-name">Men</div>
+            </div>
+          </div>
+          <!-- Teacher separated -->
+          <div class="avatar-block" style="margin-left: 60px;">
+            <img src="images/characters/avatar_toni.png" alt="Toni" class="avatar-pres">
+            <div class="avatar-name">Toni</div>
+          </div>
         </div>
       </div>
       <button class="start-btn" id="start-btn">Començar</button>
@@ -384,27 +406,26 @@
           <button class="next-btn" id="sprint2-close" style="display:none; margin-left:8px;">Tornar</button>
         </div>
       </div>
-      <!-- Replace the timeline tooltip and script in Sprint 2 Page with this version -->
       <!-- Timeline and tooltip (inside #sprint2-page, after the character-box) -->
       <div style="position:absolute; top:18%; left:0; right:0; display:flex; flex-direction:column; align-items:center; z-index:2;">
         <!-- Vertical timeline line -->
         <div style="height: 340px; width: 6px; background: #222; border-radius: 3px; position: relative; margin-bottom: 0; margin-top: 0; box-shadow: 0 2px 8px #bbb;">
           <!-- Timeline points (buttons) -->
-          <button class="timeline-point" data-title="user-story-mapping.jpg"
-            style="position:absolute; top:0; left:50%; transform:translate(-50%,-50%); background:#fffbe6; border:4px solid #ffb300; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #ffb30044; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-size:1.1em; transition:box-shadow 0.2s;">
+          <button class="timeline-point" data-title="User Story Mapping"
+            style="position:absolute; top:0; left:50%; transform:translate(-50%,-50%); background:#fffbe6; border:4px solid #ffb300; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #ffb30044; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Segoe UI'; font-size:1.1em; transition:box-shadow 0.2s;">
             <span style="font-size:1.5em; color:#ffb300;">🗺️</span>
           </button>
-          <button class="timeline-point" data-title="journey-map1.jpg"
-            style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#f5e6fc; border:4px solid #c569f3; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #c569f344; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-size:1.1em; transition:box-shadow 0.2s;">
+          <button class="timeline-point" data-title="Journey Map Usuari"
+            style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#f5e6fc; border:4px solid #c569f3; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #c569f344; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Segoe UI'; font-size:1.1em; transition:box-shadow 0.2s;">
             <span style="font-size:1.5em; color:#c569f3;">🟣</span>
           </button>
-          <button class="timeline-point" data-title="journey-map2.jpg"
-            style="position:absolute; top:100%; left:50%; transform:translate(-50%,-50%); background:#e0f3ff; border:4px solid #2a7cff; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #2a7cff44; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-size:1.1em; transition:box-shadow 0.2s;">
+          <button class="timeline-point" data-title="Journey Map Entrenador/a"
+            style="position:absolute; top:100%; left:50%; transform:translate(-50%,-50%); background:#e0f3ff; border:4px solid #2a7cff; width:54px; height:54px; border-radius:50%; box-shadow:0 2px 8px #2a7cff44; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Segoe UI'; font-size:1.1em; transition:box-shadow 0.2s;">
             <span style="font-size:1.5em; color:#2a7cff;">🔵</span>
           </button>
         </div>
         <!-- Tooltip for timeline points -->
-        <div id="timeline-tooltip" style="display:none; position:fixed; background:#fff; color:#222; border-radius:8px; padding:8px 18px; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-size:1.1em; box-shadow:0 2px 8px #bbb; pointer-events:none; z-index:100;"></div>
+        <div id="timeline-tooltip" style="display:none; position:fixed; background:#fff; color:#222; border-radius:8px; padding:8px 18px; font-family:'Segoe UI'; font-size:1.1em; box-shadow:0 2px 8px #bbb; pointer-events:none; z-index:100;"></div>
       </div>
 
       <script>
@@ -418,9 +439,9 @@
             'images/projects/journey-map2.jpg'
           ];
           const timelineFiles = [
-            'user-story-mapping.jpg',
-            'journey-map1.jpg',
-            'journey-map2.jpg'
+            'User Story Mapping',
+            'Journey Map Usuari',
+            'Journey Map Entrenador/a'
           ];
 
           timelinePoints.forEach((point, idx) => {
@@ -478,7 +499,7 @@
         >
         <div style="display:flex; flex-direction:column; justify-content:center; height:100%; margin-left: 120px;">
           <button id="btn-criteris-acceptacio"
-            style="background: #c569f3; color:#ffffff; border:none; border-radius:12px; padding:16px 32px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive; box-shadow:0 2px 8px #bbb; cursor:pointer;">
+            style="background: #c569f3; color:#ffffff; border:none; border-radius:12px; padding:16px 32px; font-size:1.1em; font-family:'Segoe UI'; box-shadow:0 2px 8px #bbb; cursor:pointer;">
             Veure Criteris d'Acceptació
           </button>
         </div>
@@ -517,12 +538,12 @@
       <!-- Add button to return to carousel -->
       <div style="width:100%; display:flex; justify-content:center; margin-top:24px;">
         <button id="btn-trello"
-          style="background: #c569f3; color:#fff; border:none; border-radius:12px; padding:16px 32px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive; font-weight:normal; letter-spacing:0.01em; box-shadow:0 2px 8px #bbb; cursor:pointer;">
+          style="background: #c569f3; color:#fff; border:none; border-radius:12px; padding:16px 32px; font-size:1.1em; font-family:'Segoe UI'; font-weight:normal; letter-spacing:0.01em; box-shadow:0 2px 8px #bbb; cursor:pointer;">
           Veure Trello
         </button>
       </div>
       <button class="btn-to-carousel" onclick="goToCarousel()">
-        ⬅ Torna al Carrusel
+        ⬅ Etapes del projecte
       </button>
     </div>
 
@@ -550,7 +571,7 @@
   const dialogues = [
     {
       name: "Cinta",
-      text: "Hola Toni! Sóc la Cinta, portaveu de l’equip ENBIDIA."
+      text: "Hola Toni! Soc la Cinta i formo part de l’equip ENBIDIA."
     },
     {
       name: "Cinta",
