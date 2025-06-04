@@ -467,9 +467,19 @@
     <!-- Reunió Page -->
     <div class="sprint-page" id="reunio-page" style="display:none;">
       <div class="reunio-overlay" style="position:fixed; inset:0; background: url('images/backgrounds/reunio.jpg') center/cover no-repeat; z-index:-1;"></div>
-      <!-- Change the avatar dynamically on the Reunió page depending on the speaker -->
-      <!-- Replace this block inside the Reunió page -->
-      <div class="character-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
+      
+      <!-- Bloc de Toni -->
+      <div id="reunio-toni-box" class="character-box" style="position: absolute; top: 40px; left: 0; right: 0; margin: auto; max-width: 600px; display: none;">
+        <img src="images/characters/avatar_toni.png" alt="Toni" class="avatar" id="reunio-toni-avatar">
+        <div class="dialogue-content">
+          <div class="character-name" id="reunio-toni-character-name">Toni</div>
+          <div class="dialogue" id="reunio-toni-dialogue-text"></div>
+          <button class="next-btn" id="reunio-toni-next-btn" style="display:none;">Següent</button>
+        </div>
+      </div>
+
+      <!-- Bloc de Ferran -->
+      <div class="character-box" id="reunio-ferran-box" style="margin:auto; position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px;">
         <img src="images/characters/avatar_ferran.jpeg" alt="Ferran" class="avatar" id="reunio-avatar">
         <div class="dialogue-content">
           <div class="character-name" id="reunio-character-name">Ferran</div>
@@ -477,8 +487,7 @@
           <button class="next-btn" id="reunio-next-btn">Següent</button>
           <button class="next-btn" id="reunio-close" style="display:none; margin-left:8px;">Tornar</button>
         </div>
-      </div>    
-      <!-- Add button to return to carousel -->
+      </div>
       <button class="btn-to-carousel" onclick="goToCarousel()">
         ⬅ Etapes del projecte
       </button>
@@ -1080,7 +1089,7 @@
   const sprint4Dialogues = [
     {
       name: "Cinta",
-      text: "Finalment vam preparar la demo i aquesta presentació interactiva!"
+      text: "Finalment vam preparar aquesta presentació interactiva!"
     },
     {
       name: "Cinta",
@@ -1195,13 +1204,14 @@ function playTypeSound() {
   typeSound.play();
 }
 
-function typeReunioDialogue(text, callback) {
+function typeReunioDialogue(text, callback, targetBox) {
+  const box = targetBox || reunioDialogueBox;
   reunioTyping = true;
-  reunioDialogueBox.innerHTML = "";
+  box.innerHTML = "";
   let i = 0;
   function typeChar() {
     if (i < text.length) {
-      reunioDialogueBox.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+      box.innerHTML += text[i] === "\n" ? "<br>" : text[i];
       if (text[i] !== " " && text[i] !== "\n") playTypeSound();
       i++;
       reunioTypingTimeout = setTimeout(typeChar, 22);
@@ -1219,12 +1229,34 @@ const reunioAvatars = {
 };
 
 function showReunioDialogue(index) {
-  reunioNameBox.textContent = reunioDialogues[index].name;
-  // Set avatar according to speaker
-  reunioAvatar.src = reunioAvatars[reunioDialogues[index].name] || reunioAvatars["Ferran"];
-  reunioAvatar.alt = reunioDialogues[index].name;
-  typeReunioDialogue(reunioDialogues[index].text);
-  reunioNextBtn.style.display = (index < reunioDialogues.length - 1) ? "inline-block" : "none";
+  const toniBox = document.getElementById('reunio-toni-box');
+  const toniName = document.getElementById('reunio-toni-character-name');
+  const toniText = document.getElementById('reunio-toni-dialogue-text');
+  const toniNextBtn = document.getElementById('reunio-toni-next-btn');
+  const ferranBox = document.getElementById('reunio-ferran-box');
+  const ferranName = document.getElementById('reunio-character-name');
+  const ferranText = document.getElementById('reunio-dialogue-text');
+  const ferranNextBtn = document.getElementById('reunio-next-btn');
+
+  const dialogue = reunioDialogues[index];
+
+  if (dialogue.name === "Toni") {
+    toniBox.style.display = "flex";
+    toniName.textContent = dialogue.name;
+    toniText.innerHTML = "";
+    typeReunioDialogue(dialogue.text, null, toniText);
+    ferranBox.style.visibility = "hidden";
+    // Mostra el botó "Següent" només si no és l'últim diàleg
+    toniNextBtn.style.display = (index < reunioDialogues.length - 1) ? "inline-block" : "none";
+    ferranNextBtn.style.display = "none";
+  } else {
+    toniBox.style.display = "none";
+    ferranBox.style.visibility = "visible";
+    ferranName.textContent = dialogue.name;
+    typeReunioDialogue(dialogue.text, null, ferranText);
+    toniNextBtn.style.display = "none";
+    ferranNextBtn.style.display = (index < reunioDialogues.length - 1) ? "inline-block" : "none";
+  }
   reunioCloseBtn.style.display = (index === reunioDialogues.length - 1) ? "inline-block" : "none";
 }
 
@@ -1244,6 +1276,19 @@ reunioNextBtn.addEventListener('click', () => {
   if (reunioTyping) {
     clearTimeout(reunioTypingTimeout);
     reunioDialogueBox.innerHTML = reunioDialogues[reunioIdx].text.replace(/\n/g, "<br>");
+    reunioTyping = false;
+    return;
+  }
+  reunioIdx++;
+  if (reunioIdx < reunioDialogues.length) {
+    showReunioDialogue(reunioIdx);
+  }
+});
+
+reunioToniNextBtn.addEventListener('click', () => {
+  if (reunioTyping) {
+    clearTimeout(reunioTypingTimeout);
+    document.getElementById('reunio-toni-dialogue-text').innerHTML = reunioDialogues[reunioIdx].text.replace(/\n/g, "<br>");
     reunioTyping = false;
     return;
   }
