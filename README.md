@@ -23,7 +23,8 @@ La presentació està estructurada per **escenes** i representa el nostre recorr
 3. **Sprint 2** – MVP i feedback dels usuaris
 4. **Sprint 3** – Implementació i criteris d’acceptació
 5. **Reunió** – Resolució de problemes d’organització
-6. **Sprint 4** – Entrega final, demo i Trello
+6. **Sprint 4** – Entrega final i Trello
+7. **Demo**
 
 Cada escena està representada per **personatges** del nostre equip, que explica què vam fer i com vam superar cada fase del projecte.
 
